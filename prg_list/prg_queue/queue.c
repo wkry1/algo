@@ -1,30 +1,42 @@
-//要素の挿入は先頭から、取り出しは最後から
-//First In First Out
-//基本的操作：最後尾に要素を追加、先頭から要素を取り出し
-
 #include <stdlib.h>
 #include <stdio.h>
-#include "list.h"
-#include "Item.h"
+#include "../Item.h"
+#include "queue.h"
+typedef struct QUEUEnode *QUEUElink;
 struct QUEUEnode{
     Item item;
-    link next;
+    QUEUElink next;
 };
-static link head;
-static link tail;
+static QUEUElink head;
+static QUEUElink tail;
+
+QUEUElink QUEUE_NEW(Item item, QUEUElink next){
+    QUEUElink x = malloc(sizeof *x);
+    x->item = item;
+    x->next = next;
+    return x;
+}
+
+void QUEUEinit(){
+    head = tail = NULL;
+}
+
+int QUEUEempty(){
+    return head == tail;
+}
 
 void QUEUEput(Item item){
     if(head == NULL){
-        head = (tail = NEW(item, head));
+        head = (tail = QUEUE_NEW(item, head));
         return;
     }
-    tail->next = NEW(item, tail->next);
+    tail->next = QUEUE_NEW(item, tail->next);
     tail = tail->next;
 }
 
 Item QUEUEget(){
     Item item = head->item;
-    link t =head->next;
+    QUEUElink t =head->next;
     free(head);
     head = t;
     return item;
