@@ -12,7 +12,7 @@ int main(){
 
     printf("\n Dequeing items from the queue\n");
     while(!QUEUEempty()){
-        Item item = QUEUEput();
+        Item item = QUEUEget();
         printf("Dequeued %d\n", item);
     }
 
