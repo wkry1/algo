@@ -2,13 +2,21 @@
 #define ITEM_H
 #include <stdio.h>
 
-typedef int Item;
-typedef int Key;
+typedef char* Key;
+struct record{
+    Key keyVal;
+    int value;
+};
+typedef struct record *Item;
 
-#define key(A) (A)
-#define eq(A, B) (A == B)
-#define less(A, B) (key(A) < key(B))
-#define NULLitem -999
-#define exch(A,B) {Item t=A; A=B; B=t;}
+#define maxN 1000
+#define maxKey 100
+#define NULLitem NULL
+
+Key ITEMrandkey(void);
+Item ITEMrand(key);
+void ITEMshow(Item);
+Key key(Item);
+
 
 #endif
